@@ -1,0 +1,34 @@
+﻿<div class="container-fluid" id="view-trips" ng-controller="UserProfileController">
+
+    <div class="jumbotron" id="view-trips">
+
+        <!--Shows all the trips of the user where they are a passenger. passengerTrips is a PassengerJourneyViewModel-->
+        <div class="well row">
+            <img class="col-sm-2" width="180" height="180" src={{userProfile.PictureUrl}}></>
+            <div class="col-sm-6 Montserrat">Date of Birth: {{userProfile.DOB}}</div><br /><br />
+            <div class="col-sm-6 Montserrat">Hometown: {{userProfile.HomeTown}}</div><br /><br />
+            <div class="col-sm-6 Montserrat">Phone: {{userProfile.Phone}}</div>
+            <button class="btn btn-warning" ng-click="EditProfile()">Edit Profile</button>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+
+        <div id="userReviews">
+            <div class="well row" ng-repeat="r in userProfile.Reviews">
+                <div class="col-sm-2">From {{r.passengerUsername}}</div>
+                <div class="col-sm-2">Date of the review: {{r.ReviewDate}}</div>
+                <div class="col-sm-2">{{r.Stars}} Stars</div>
+                <div class="col-sm-6">{{r.Description}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var elem;
+    if (elem = document.getElementsByClassName('modal-backdrop fade in')[0]) {
+        elem.parentNode.removeChild(elem);
+    }
+</script>

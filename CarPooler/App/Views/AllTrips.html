@@ -1,0 +1,49 @@
+﻿<div ng-controller="AllTripsController">
+    <div id="addTrip"class="well row" style="margin-top: 5%;">
+        <input class="form-control" placeholder="Enter destination" ng-model="trip.destination" ng-click="inputFieldClicked=false" />
+        <input class="form-control" placeholder="Enter departure point" ng-model="trip.departurePoint" ng-click="inputFieldClicked=false" />
+        <input class="form-control" placeholder="Enter date" value={{inputDate}} ng-click="inputFieldClicked=true" />
+        <div ng-show ="inputFieldClicked"><datepicker ng-model="date1" show-weeks="showWeeks" starting-day="1" ng-click="inputDate=(date1 | date:'fullDate')"></datepicker></div>
+        <input class="form-control" placeholder="Enter time of departure (Not Required)" ng-model="trip.etd" ng-click="inputFieldClicked=false" />
+        <input class="form-control" placeholder="Enter time of arrival (Not Required)" ng-model="trip.eta" ng-click="inputFieldClicked=false" />
+        <input class="form-control" placeholder="Enter Seats Available" ng-model="trip.seatsAvailable" ng-click="inputFieldClicked=false" />
+
+        <br/>
+        <button class="btn btn-warning" ng-click="addTrips()">Add Journey</button>
+
+    </div>
+    <div class="Montserrat well row">
+        <div class="col-sm-2">Destination</div>
+        <div class="col-sm-2">Departure Point</div>
+        <div class="col-sm-2">Date</div>
+        <div class="col-sm-2">Driver</div>
+        <div class="col-sm-2">Estimated time of arrival</div>
+        <div class="col-sm-2">Estimated time of departure</div>
+    </div>
+    <div ng-repeat="t in tripsList">
+        <div class="well row" id="wellRowBlur">
+            <div class="col-sm-2">{{t.Destination}}</div>
+            <div class="col-sm-2">{{t.DeparturePoint}}</div>
+            <div class="col-sm-2">{{t.Date}}</div>
+            <div class="col-sm-2">{{t.Users[0].Username}} <a href="#/UserProfile/{{t.Users[0].Username}}#userReviews" class="btn btn-warning">Reviews</a></div>
+            <div class="col-sm-2">{{t.ETA}}</div>
+            <div class="col-sm-2">{{t.ETD}}</div>
+            
+            <div class="col-sm-2">
+                <select id="seatsList" ng-model="nSpots" ng-init="nSpots=nSpots||getArray(t.SeatsAvailable)[0]" ng-options="item for item in getArray(t.SeatsAvailable)"></select>
+                <!-- Why does alert(nSeats) alert 3 times?
+        <script>document.getElementById("seatsListsss").addEventListener('change',function(e){
+                    var nSeats = e.target.value;
+                    alert(nSeats);
+                },true)
+        </script>
+            -->
+                <button class="btn btn-warning" ng-click="requestSpots(tripsList[$index].Id,nSpots)">Request spot(s)</button>
+            </div>
+
+
+
+    </div>
+
+</div>
+</div>

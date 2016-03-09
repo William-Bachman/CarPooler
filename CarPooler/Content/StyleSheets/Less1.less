@@ -1,0 +1,177 @@
+/* ============== VARIABLES ================ */
+
+@black: #000000;
+@darkGray: #222222;
+@medGray: #575467;
+@darkBlue: #0a4594;
+@medBlue: #0065c0;
+
+@intitialPosition: -1400px;
+@startingPosition: -3205px;
+
+/* ============= MIXINS ================== */
+
+.vGradient(@top, @bottom){
+    background-color: @top;
+    background-image: -webkit-gradient(linear, top, bottom, from(@top), to(@bottom)); 
+    background-image: -webkit-linear-gradient(top, @top, @bottom); 
+    background-image: -moz-linear-gradient(top, @top, @bottom); 
+    background-image: -ms-linear-gradient(top, @top, @bottom); 
+    background-image: -o-linear-gradient(top, @top, @bottom); 
+    background-image: linear-gradient(top, @top, @bottom); 
+}
+
+.translate(@left, @top) {
+    transform:translate(@left, @top);
+    -ms-transform:translate(@left, @top); 
+    -moz-transform:translate(@left, @top);
+    -webkit-transform:translate(@left, @top);
+    -o-transform:translate(@left, @top); 
+}
+
+.scale(@width, @height) {
+    transform: scale(@width, @height);
+    -ms-transform: scale(@width, @height);
+    -webkit-transform: scale(@width, @height);
+    -o-transform: scale(@width, @height);
+    -moz-transform: scale(@width, @height);
+}
+
+.transition (@args) {
+    -webkit-transition: @args;
+    -moz-transition: @args;
+    -o-transition: @args;
+    transition: @args;
+}
+
+.roundedCorners(@radius) {
+    -moz-border-radius: @radius; 
+    -webkit-border-radius: @radius;
+    border-radius: @radius;
+}
+
+.boxShadow (@args) {
+    -moz-box-shadow: @args; 
+    -webkit-box-shadow: @args; 
+    box-shadow: @args; 
+}
+
+.animate(@args) {
+    animation: @args;
+    -moz-animation: @args;
+    -webkit-animation: @args;
+    -o-animation: @args;
+}
+
+/* =============== KEYFRAMES ===================== */
+
+@keyframes zoom {
+    from {
+        .scale(.2, .2);
+        margin-left: -3100px;
+    }
+    to {
+        .scale(1, 1);
+        margin-left: @startingPosition;
+    }
+}
+
+@-moz-keyframes zoom {
+    from {
+        .scale(.1, .1);
+        margin-left: -3100px;
+    }
+    to {
+        .scale(1, 1);
+        margin-left: @startingPosition;
+    }
+}
+
+@-webkit-keyframes zoom {
+    from {
+        .scale(.2, .2);
+        margin-left: -3100px;
+    }
+    to {
+        .scale(1, 1);
+        margin-left: @startingPosition;
+    }
+}
+
+@-o-keyframes zoom {
+    from {
+        .scale(.2, .2);
+        margin-left: -3100px;
+    }
+    to {
+        .scale(1, 1);
+        margin-left: @startingPosition;
+    }
+}
+
+ /* ============== MAIN STYLES ==================== */
+
+html {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    .vGradient(@black, @darkGray);
+}
+
+.image {
+    display: inline-block;
+    margin: 50px 50px 0 50px;
+    height: 250px;
+    width: 250px;
+    .vGradient(@medBlue, @darkBlue);
+    .roundedCorners(10px);
+    .boxShadow(3px 3px 10px rgba(0, 0, 0, .5));
+
+    &:hover {
+        cursor: pointer;
+        .vGradient(lighten(@medBlue, 10%), lighten(@darkBlue, 10%));
+    }
+
+    &:target {
+        .scale(1.25, 1.25);
+    }
+}
+
+#carousel-wrapper {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -165px;
+    margin-left: @startingPosition;
+    width: 6000px;
+    .animate(zoom 1s);
+}
+
+.image, #carousel-wrapper {
+    .transition(all .5s ease-in-out);
+}
+
+.target {
+    position: absolute;
+    border: 1px solid red;
+    width: 25%;
+    height: 100%;
+    z-index: 10;
+}
+
+#right-target {
+    right: 0;
+}
+
+#left-target {
+    left: 0;
+}
+

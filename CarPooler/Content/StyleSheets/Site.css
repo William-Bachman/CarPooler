@@ -1,0 +1,175 @@
+﻿body {
+  background-color: rgba(52, 152, 219,.8);
+  height: 10vh;
+    
+   
+}
+
+nav#menu {
+    transition: margin 0.1s ease-in-out;
+}
+
+#well row {
+    width: 120vw;
+}
+
+#wellRowBlur {
+   
+      
+    opacity: 0.8;
+}
+
+#wellRowBlur:hover {
+   
+        -webkit-filter: initial;
+    filter: initial;
+    opacity: initial;
+    background-color: #22A7F0;
+    font-size-adjust: .56;
+     
+}
+
+.jumbotron {
+    background: url('https://d2fijpsef22722.cloudfront.net/photos/massive/847187872-san-francisco.jpg') no-repeat;
+    background-size:cover;
+    background-position-x: center;
+    height:105vh;
+    width: 100vw;
+    padding-top: 8%;
+}
+
+.jumbotronIndex {
+    background: url('http://hdwallpapersfit.com/wp-content/uploads/2015/03/california-beach-wallpapers.jpg') no-repeat;
+    background-size:contain;
+    background-position-x:top;
+    height:125vh;
+    
+    
+   
+}
+
+.view-trips {
+     background: url('https://d2fijpsef22722.cloudfront.net/photos/massive/847187872-san-francisco.jpg') no-repeat;
+     background-size:cover;
+    background-position-x: center;
+  
+    height:95vh;
+    width: 100vw;
+}
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 50px
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.well  {
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    background-color: rgba(52, 152, 219,.6);
+    font-size: large;
+}
+
+.well:hover  {
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    background-color: rgba(52, 152, 219,1.0);
+    font-size: large;
+}
+
+
+.Montserrat {
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif !important;
+    font-size: large;
+    color: #86E2D5 !important;
+    
+}
+
+.DestiFont {
+     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif !important;
+    font-size: xx-large;
+    color: #F4D03F;
+   
+   
+}
+
+.DestiFont2 {
+     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif !important;
+    font-size: xx-large;
+    color: #F4D03F;
+    position: fixed;
+    padding-left: 22%
+}
+
+.MapIndex {
+    position: relative;
+   
+}
+
+.SiteColor {
+   background-color: #3498db !important;
+}
+
+#navbarmain {
+    color: #86E2D5 !important;
+    height: 82px;
+    opacity: 0.6;
+}
+
+
+#navbarmain:hover {
+    opacity: 1.0;
+}
+
+
+.centerBox {
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+#addTrip{
+    margin-top:40px;
+}
+
+#navbarfontmargin {
+    margin-top: 18px;
+    font-size-adjust: 0.62;
+}
+
+#siteLogo {
+    margin-top: 10px;
+    font-size-adjust: 0.85;
+    font-family: Pacifico;
+    color: #F4D03F;
+}
+
+#mottoBox {
+   float:initial;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif !important;
+    font-size: xx-large;
+    color: rgba(244, 208, 63, 0.8);
+     padding-left: 36%;
+    
+}
+
+#mottoBox2 {
+   float:initial;
+font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif !important;
+    font-size: xx-large;
+    color: #F4D03F;
+    font-size-adjust: 0.98;
+    
+    
+}
+
+.gm-style-iw>div {
+  width: 300px !important;
+  text-align:center;
+}

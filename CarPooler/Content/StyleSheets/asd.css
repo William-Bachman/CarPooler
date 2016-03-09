@@ -1,0 +1,8 @@
+﻿/* Mixin */
+/* Implementation */
+#somediv {
+  -webkit-box-shadow: 5px 5px 6px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 5px 5px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 5px 5px 6px rgba(0, 0, 0, 0.3);
+}
+/*# sourceMappingURL=asd.css.map */

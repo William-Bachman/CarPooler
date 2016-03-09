@@ -1,0 +1,146 @@
+﻿<div  id="view-trips" ng-controller="UserTripsController">
+
+    <!-- Modal for Edit Trip-->
+    <div class="modal fade" id="myTripsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="closeModal('edit')" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Enter new Departure Point</h4>
+                </div>
+                <div class="modal-body">
+                    <label for="DeparturePoint">Departure Point</label>
+                    <input id="DeparturePoint" class="form-control" ng-model="trip.DeparturePoint" />
+                    <label for="ETD">Estimated time of departure:</label>
+                    <input id="ETD" class="form-control" ng-model="trip.ETD" />
+                    <label for="ETA">Estimated time of arrival:</label>
+                    <input id="ETA" class="form-control" ng-model="trip.ETA" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" ng-click="closeModal('edit')">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="editTrip()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Rate a Driver-->
+    <div class="modal fade" id="myRatingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="closeModal('review')" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Review for {{review.driver}}</h4>
+                </div>
+                <div class="modal-body">
+                    <textarea rows="10" cols="50" id="tripReview" placeholder="Your review here..." class="form-control" ng-model="review.description" />
+                    <div>Num. of Stars</div>
+                    <select ng-model="review.stars" convert-to-number>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                        <option value="4">Four</option>
+                        <option value="5">Five</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" ng-click="closeModal('review')">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="addReview()">Submit Review</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Accepting Requests-->
+    <div class="modal fade" id="myRequestModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="closeModal('request')" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Accept Request</h4>
+                </div>
+                <div class="modal-body">
+                    <div ng-repeat="u in request.usersNotConfirmed">
+                        <div><h4 style ="display:inline"><a href="#/UserProfile/{{u.Username}}">{{u.Username}}</a> requested {{u.NumSeats}} seat(s)  </h4><button type="button" class="btn btn-primary" ng-click="acceptRequest(u.Username,request.tripId)">Accept Request</button></div>
+                        
+                        <br />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" ng-click="closeModal('request')">Close</button>                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="jumbotron" id="view-trips" style="padding-top: 7%">
+
+        <!--Shows all the trips of the user where they are a passenger. passengerTrips is a PassengerJourneyViewModel-->
+        <div class="well row"  ng-repeat="t in passengerTrips">
+          
+         <iframe class="col-sm-3" width="300" height="250" ng-src={{t.CityVid}} >This video did not load</iframe>
+            <div class="col-sm-6 DestiFont">{{t.Destination}}</div>
+            <div class="col-sm-6">Date: {{t.Date}}</div>
+            <div class="col-sm-6">Driver: {{t.Driver}}</div>
+            <div class="col-sm-6">Seats requested: {{t.NumSeats}}</div>
+            <div ng-show="t.IsConfirmed && t.isDone<0">
+                <button class="btn btn-danger" ng-click="rateDriver()">Rate Driver</button>
+            </div>
+            <div ng-show="t.IsConfirmed && t.isDone">
+                <button class="btn btn-warning" ng-click="triggerModal('review',t)">Rate Driver</button>
+            </div>
+            <div ng-show="!t.IsConfirmed &&!t.isDone">
+                <span ng-show="!t.IsConfirmed" style="color:white;font-weight:bold">Awaiting confirmation...</span>
+                <span class="btn btn-warning" ng-click="cancelRequest(t)">Cancel Request</span>
+            </div>
+            <div ng-show="!t.IsConfirmed &&t.isDone">
+                <span ng-show="!t.IsConfirmed" style="color:#ff6a00;font-weight:bold">The trip has already taken place</span>
+            </div>
+            <div ng-show="t.IsConfirmed &&!t.isDone">
+                <span ng-show="!t.IsConfirmed" style="color:#ff6a00;font-weight:bold">Your request has been accepted</span>
+                <span class="btn btn-warning" ng-click="cancelRequest(t)">Cancel Request</span>
+            </div>
+            <!--Not sure putting the link in the a href like that is how its supposed to be done-->
+            <div><a style="color:rgba(244, 208, 63, 0.8)" ng-click="getSingleTrip(t)">See details of the trip</a> </div>
+        </div>
+
+        <br />
+        <br />
+        <br />
+        <br />
+
+        <!--Shows all the trips of the user where they are a driver. driverTrips is a DriverJourneyViewModel-->
+        <div class="Montserrat well row" id="nav#menu" style="width: 100vw;">
+            <div class="col-sm-1">Destination</div>
+            <div class="col-sm-1">Departure Point</div>
+            <div class="col-sm-2">Confirmed Passengers</div>
+            <div class="col-sm-1">New Requests</div>
+            <div class="col-sm-2">Seats Available</div>
+            <div class="col-sm-2">Date</div>
+            <div class="col-sm-2">ETD</div>
+            <div class="col-sm-1">ETA</div>
+        </div>
+        <div class="well row" ng-repeat="t in driverTrips">
+            
+            <div class="col-sm-1">{{t.Destination}}</div>
+            <div id="tripDestination" class="col-sm-1">{{t.DeparturePoint}} </div>
+            <div class="col-sm-2">
+                <!-- Angular PopOvers -->
+                <span custom-popoverconfirmed popover-placement="bottom" popover-usersconfirmed={{t.UsersConfirmed}}></span>
+            </div>
+            <div class="col-sm-1">
+                <a href="" ng-click="triggerModal('request',t)">{{t.UsersNotConfirmed.length}}</a>
+            </div>            
+           
+            <div class="col-sm-2">{{t.SeatsAvailable}}</div>
+            <div class="col-sm-2">{{t.Date}}</div>
+            <div class="col-sm-2">{{t.ETD}}</div>
+            <div class="col-sm-1">{{t.ETA}}</div>
+            <button class="btn btn-warning col-sm-offset-11" ng-click="triggerModal('edit',t)">Edit</button>
+            <button class="btn btn-warning col-sm-offset-11" ng-click="deleteTrip(t)">Delete</button>
+            </div>
+    </div>
+</div>
+
+<!---->

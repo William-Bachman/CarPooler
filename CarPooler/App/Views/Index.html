@@ -1,0 +1,47 @@
+﻿
+<div ng-controller="IndexController">
+    <div id="body">
+        <div style="margin-top: 7%" id="mottoBox">
+            New Friends, Amazing Experiences,<br />
+        </div><div id="mottoBox2" style="padding-left: 42%"> RoadTrips Redefined.</div><br />
+        <div id="googleMap" class="centerBox" style="width:100%;height:380px;text-align:center" ng-init="getJourneys()"><h2 style="color:orange;margin-top:50px">Loading map ...</h2></div>
+
+        <div class="jumbotronIndex top">
+        <div class="DestiFont form-inline center-block" style="padding-left: 18%;">
+            <label for="DeparturePoint">Departure City</label>
+            <input id="DeparturePoint" class="form-control" ng-model="trip.departurePoint" />
+            <label for="destination">Destination</label>
+            <input id="destination" class="form-control" ng-model="trip.destination" />
+            <button class="btn btn-warning" ng-click="getJourneys(trip)">Search</button>
+
+            <div style="margin-left:480px;font-size:medium" ng-show="trip.destination && !trip.departurePoint">
+                <ul>
+                    <li ng-repeat="x in destinationsOnly | filter:trip.destination | orderBy:'Destination'">
+                        {{ (x.Destination | uppercase)}}
+
+                    </li>
+                </ul>
+            </div>
+
+            <div style="margin-left:480px;font-size:medium" ng-show="trip.departurePoint && !trip.destination">
+                <ul>
+                    <li ng-repeat="x in depPointsOnly | filter:trip.departurePoint | orderBy:'departurePoint'">
+                        {{ allDestinations[x.index].Destination | uppercase}}
+                    </li>
+                </ul>
+            </div>
+
+            <div style="margin-left:480px;font-size:medium" ng-show="trip.departurePoint && trip.destination">
+                <ul>
+                    <li ng-repeat="x in allDestinations | filter:trip.departurePoint | filter:trip.destination | orderBy:'destination'">
+                        {{ x.Destination | uppercase}}
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        </div>
+</div>
+    </div>
+
+

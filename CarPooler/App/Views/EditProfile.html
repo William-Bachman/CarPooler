@@ -1,0 +1,15 @@
+﻿<div class="container-fluid" id="view-trips" ng-controller="UserProfileController">
+
+
+    <div class="modal-body" id="addTrip" style="padding-top: 7%;">
+
+        <input id="DeparturePoint" placeholder="Enter URL for your photo" class="form-control" ng-model="profile.PictureUrl" /><br />
+
+        <input id="date" placeholder="Date of Birth" class="form-control" ng-model="profile.DOB" /><br />
+
+        <input id="ETD" class="form-control" placeholder="Hometown" ng-model="profile.HomeTown" /><br />
+
+        <input id="ETA" class="form-control" placeholder="Phone" ng-model="profile.Phone" /><br />
+        <button class="btn btn-warning" ng-click="EditProfile()">Save Profile</button>
+    </div>
+</div>
